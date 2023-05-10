@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Test</title>
+</head>
+<body>
+  <h1>API Test</h1>
+  <button onclick="testAPI()">Test API</button>
+  <div id="output"></div>
+
+  <script>
+    function testAPI() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'localhost:5000/api/user/login', true);
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          document.getElementById('output').innerHTML = xhr.responseText;
+        }
+        else {
+          alert('Request failed.  Returned status of ' + xhr.status);
+        }
+      };
+
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
