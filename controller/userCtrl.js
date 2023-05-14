@@ -1,6 +1,7 @@
 
 //now we have to require our user model
 
+const generateToken = require("../config/jwtToken");
 const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
 
@@ -38,13 +39,7 @@ function checkPasswordStrength(password) {
 
   // Return results
   if (strength < 2) {
-    throw new Error("Password easy to guess. " + tips);
-    return false;
-  } else if (strength === 2) {
-    throw new Error("Medium difficulty. " + tips);
-    return false;
-  } else if (strength === 3) {
-    throw new Error("Difficult. " + tips);
+    throw new Error("Password easy to guess. Add at least another one of the following suggestions:" + tips);
     return false;
   } else {
     console.log("OK!");
@@ -58,7 +53,7 @@ function checkPasswords(password, checkPassword) {
     return false;
   }
   console.log("hola");
-  console.log(password.value); 
+  //console.log(password.value); 
   return true;
 }
 
@@ -87,6 +82,8 @@ const createUser = asyncHandler(async (req, res) => {
     const password = req.body.password;
     const checkPassword = req.body.checkPassword;
 
+    console.log(nomeCognome, email, telefono, password, checkPassword);
+
     //var verifica = false;
     
     const findUser = await User.findOne({email: email});
@@ -96,7 +93,7 @@ const createUser = asyncHandler(async (req, res) => {
     
 
     //console.log(telefono.length);
-    console.log(telefono.charAt(0));
+    //console.log(telefono.charAt(0));
     console.log(telefono.length);
 
 
@@ -111,8 +108,8 @@ const createUser = asyncHandler(async (req, res) => {
         //create a new user
         //const newUser = await User.create(req.body);
         const newUser = await User.create(req.body);
-        newUser = await newUser.save();
-        res.json(newUser);
+        //newUser = await newUser.save();
+        res.redirect("../../index2.html");
         console.log("Utente creato con successo");
 
         
@@ -134,13 +131,20 @@ const createUser = asyncHandler(async (req, res) => {
 //login controller
 
 const loginUserCtrl = asyncHandler(async (req, res) => {
-    const {email, password} = req.body;
+    const email = req.body.email;
+    const password = req.body.password;
+    //console.log(email);
+    //const {email, password} = req.body;
+    //console.log(email);
     //check if user exists
     const findUser = await User.findOne({email: email});
+    if(!findUser){
+      throw new Error("Email non valida. Crea un nuovo account.");
+    }
     if(findUser && (await findUser.isPasswordMatched(password))){
-        res.json(findUser);
+        res.redirect("../../map.html");
     }else{
-        throw new Error("Invalid credentials");
+        throw new Error("Password errata. Si prega di riprovare.");
     }
 })
 
@@ -157,6 +161,21 @@ const checkUsers = asyncHandler(async (req, res) => {
 });
 
 
+const checkAUser = asyncHandler(async (req, res) => {
+  const {email, password} = req.body;
+  //const findUser = await User.findOne({email: email});
+
+  try{
+    const findUser = await User.findOne({email: email});
+    res.json(findUser);
+  }
+  catch(error){
+    throw new Error(error);
+  }
+});
+
+
+//TODO
 //next step: capire jwt
 
 //fare una get per gli amministratori, cosicche possano prendersi il numero dell'utente in caso di pericolo
@@ -165,6 +184,11 @@ const checkUsers = asyncHandler(async (req, res) => {
 //il PUT per modifica password
 
 
-module.exports = {createUser, loginUserCtrl, checkUsers};
+//per fare GET di ogni singolo utente, nel modello devo mettere un parametro "index"
+//e una funzione che ogni volta che si aggiunge un utente incrementa una variabile di 1, cosi
+//da rendere piu facile la ricerca .../utenti/index=1 (esempio)
+
+
+module.exports = {createUser, loginUserCtrl, checkUsers, checkAUser};
 
 

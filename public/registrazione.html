@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1">
+		<title>Registrazione</title>
+	</head>
+	<body>
+        <div class="registrazione">
+			<h1>Registrazione</h1>
+			<form action="/api/user/registrazione" method="post"><br>
+				<input type="text" name="nomeCognome" placeholder="NomeCognome" id="nomecognome" required><br>
+				<input type="text" name="telefono" placeholder="Telefono" id="telefono" required><br>
+				<input type="text" name="email" placeholder="Email" id="email" required><br>
+				<input type="password" name="password" placeholder="Password" id="password" required><br>
+				<input type="password" name="checkPassword" placeholder="CheckPassword" id="checkPassword" required><br>
+                <label>
+                    <input type="checkbox" id="cb" required>
+                    Accetto i termini e le condizioni
+                </label>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	</body>
+</html>

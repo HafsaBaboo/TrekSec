@@ -12,11 +12,21 @@
 
  */
 
+
+/*FRONTEND is what you interract with, whereas 
+  BACKEND is typically a server */
+
+
+
 const express = require('express');
 const dcConnect = require('./config/dbConnect');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 8080;
+
+const router = require('./routes/authRoute');
+
+
 
 const authRouter = require("./routes/authRoute");
 const bodyParser = require('body-parser');
@@ -26,14 +36,29 @@ dcConnect();
 
 //bodyParser
 app.use(bodyParser.json());
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.get('/', (req, res) => {
+   //res.send("Hello from server side");
+   //res.redirect("index2.html");
+   console.log("hi");
+   res.redirect("home.html");
+})
 /*
-app.use('/', (req, res) => {
-   res.send("Hello from server side");
+app.set("view engine", "hbs");
+app.set("views", templatePath);
+
+app.get("/login", (req, res) => {
+   res.render("login");
+   console.log("ciao");
 })
 */
 
+
+
 app.use("/api/user", authRouter);
+
 
 app.use(notFound);
 app.use(errorHandler);

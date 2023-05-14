@@ -25,6 +25,9 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    //condizioni:{
+    //    type:Boolean
+   // }
     //credenziali:{
     //    type:Boolean,
     //    required:true
