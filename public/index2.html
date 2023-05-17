@@ -4,15 +4,30 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
 		<title>Login</title>
+		<link rel="stylesheet" href="login.css"
 	</head>
 	<body>
 		<div class="login">
+
+			<button type="submit" class="click-log" style="color:black;background-color:rgb(153, 240, 153);border-color: rgb(153, 240, 153);"><p>&#x21B6;</p></button> 
+			
+			<div class="space-title">
 			<h1>Login</h1>
-			<form action="/api/user/login" method="post">
-				<input type="text" name="email" placeholder="Email" id="email" required><br>
-				<input type="password" name="password" placeholder="Password" id="password" required><br>
-				<input type="submit" value="Login">
-			</form>
+			</div>
+			<div class="log-action">
+				<form action="/api/user/login" method="post">
+					<div class="label-c">
+					<label>E-mail</label>
+					</div>
+					<input type="text" name="email" placeholder="Email" id="email" class="log" style="border-color: black;" required><br>
+					<div class="label-c">
+					<label>Password</label>
+					</div>
+					<input type="password" name="password" placeholder="Password" id="password" class="log" style="border-color: black;" required><br>
+					<input type="submit" value="Login" class="button-log" style="background-color: black; color:  white">
+					<button type="submit" class="click-log1" style="color: rgb(44, 158, 196); background-color: rgb(153, 240, 153) ; border-color:rgb(153, 240, 153) ;"><u>Reset Password</u></button>
+				</form>
+			</div>
 		</div>
 
 
