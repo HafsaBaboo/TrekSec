@@ -4,22 +4,56 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
 		<title>Registrazione</title>
+		<link rel="stylesheet" href="registrazione.css"
+
 	</head>
 	<body>
         <div class="registrazione">
+			<button type="submit" class="click-reg" style="color:black;background-color:rgb(153, 240, 153);border-color: rgb(153, 240, 153);"><p>&#x21B6;</p></button>
+			
+			<div class="title-reg">
 			<h1>Registrazione</h1>
+			</div>
+			
+			<div class="action-reg">
 			<form action="/api/user/registrazione" method="post"><br>
-				<input type="text" name="nomeCognome" placeholder="NomeCognome" id="nomecognome" required><br>
-				<input type="text" name="telefono" placeholder="Telefono" id="telefono" required><br>
-				<input type="text" name="email" placeholder="Email" id="email" required><br>
-				<input type="password" name="password" placeholder="Password" id="password" required><br>
-				<input type="password" name="checkPassword" placeholder="CheckPassword" id="checkPassword" required><br>
-                <label>
-                    <input type="checkbox" id="cb" required>
-                    Accetto i termini e le condizioni
-                </label>
-				<input type="submit" value="Login">
+				
+				<div class="label-c">
+					<label>Il tuo nome </label>
+				</div>
+				<input type="text" name="nomeCognome" placeholder="NomeCognome" id="nomecognome" class="regbox" required><br>
+				
+				<div class="label-c">
+					<label>Numero di cellulare</label>
+				</div>
+				<input type="text" name="telefono" placeholder="Telefono" id="telefono" class="regbox" required><br>
+				
+				<div class="label-c">
+					<label>E-mail</label>
+				</div>
+				<input type="text" name="email" placeholder="Email" id="email" class="regbox" required><br>
+				
+				<div class="label-c">
+					<label>Password</label>
+				</div>
+				<input type="password" name="password" placeholder="Password" id="password" class="regbox" required><br>
+				
+				<div class="label-c">
+					<label>Check Password</label>
+				</div>
+				<input type="password" name="checkPassword" placeholder="CheckPassword" id="checkPassword" class="regbox" required><br>
+				
+				<div class="privacy">
+				<input type="checkbox" id="cb" class="check" required>
+				
+				
+				<label>Accetto i termini e le condizioni autorizzando il trattamento dei miei dati personali ai sensi dell'informativa sulla privacy.</label>
+				</div>
+
+				<input type="submit" value="Registration" class="reg" style="background-color: black; color:  white">
+
 			</form>
+			</div>
 		</div>
 	</body>
 </html>
