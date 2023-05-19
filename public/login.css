@@ -1,5 +1,4 @@
 .click-log, .click-log1 {
-
     cursor: pointer;
     outline: 0;
     display: inline-block;
@@ -12,8 +11,7 @@
     font-size: 1rem;
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    height: 30px;
-    
+    height: 30px;  
 } 
 
 .space-title{
@@ -76,3 +74,16 @@ html, body, .login{
     margin-right: 200px;
 
 }
+
+.click-log1{
+    height: 50%;
+    float: right;
+    font-size: 17px;
+    margin-top: 30px;
+    margin-right: -17px;
+}
+
+form[action*="/api/user/login"] + form[action*="/api/user/resetPassword"] {
+    display: inline-block;
+    transform:translate(100%,-82%);
+  }

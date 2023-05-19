@@ -1,50 +1,37 @@
- const express = require('express');
- const { createUser, loginUserCtrl, checkUsers } = require('../controller/userCtrl');
- const router = express.Router();
+const express = require('express');
+const { createUser, loginUserCtrl, checkUsers } = require('../controller/userCtrl');
+const {checkUserExistence, changePassword} = require('../controller/resetPassword');
+const router = express.Router();
 
- router.get("/directAccess", (req, res) => {
-   //res.render("login");
-   //const bottone = document.getElementById('post');
-   //console.log(bottone);
-   console.log("ciao");
-   res.redirect("../../directAccess.html");
+router.get("/directAccess", (req, res) => {
+  res.redirect("../../directAccess.html");
 
 })
- 
- router.get("/login", (req, res) => {
-   //res.render("login");
-   //const bottone = document.getElementById('post');
-   //console.log(bottone);
-   console.log("ciao");
-   res.redirect("../../index2.html");
+
+router.get("/login", (req, res) => {
+  res.redirect("../../login.html");
 
 })
 
 router.get("/registrazione", (req, res) => {
-   //res.render("login");
-   //const bottone = document.getElementById('post');
-   //console.log(bottone);
-   console.log("ciao");
-   res.redirect("../../registrazione.html");
+  res.redirect("../../registrazione.html");
 
 })
 
+router.get("/newPassword/:id/:token", async (req, res) => {
+ res.redirect("../../newPassword.html");
+})
 
 
- router.post('/registrazione', createUser);
+router.get("/resetPassword", (req, res) => {
+  res.redirect("../../resetPassword.html");
+})
 
- router.post('/login', loginUserCtrl);
- router.get('/registrati', checkUsers);
-// router.get('/registrazione/:id', )
- 
+router.post('/registrazione', createUser);
 
- module.exports = router;
+router.post('/login', loginUserCtrl);
+router.get('/registrati', checkUsers);
+router.post('/resetPassword', checkUserExistence);
+router.put('/newPassword', changePassword);
 
-
-
-
-
-
-
-
- 
+module.exports = router;
