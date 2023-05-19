@@ -38,11 +38,9 @@ function checkPasswordStrength(password) {
   }
 
   // Return results
-  if (strength < 2) {
+  if (strength < 4) {
     throw new Error("Password easy to guess. Add at least another one of the following suggestions:" + tips);
-    return false;
   } else {
-    console.log("OK!");
     return true;
   }
 }
@@ -50,30 +48,29 @@ function checkPasswordStrength(password) {
 function checkPasswords(password, checkPassword) {
   if (password !== checkPassword) {
     throw new Error("Passwords do not match.");
-    return false;
   }
-  console.log("hola");
-  //console.log(password.value); 
   return true;
+}
+
+function checkIfEmailInString(text) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(text);
 }
 
 function checkTelefono(telefono){
   if((telefono).length != 10 ){
     throw new Error("Hai sbagliato ad inserire il numero di telefono");
-    return false;
   }
   return true;
 }
 
 
 function checkNome(nomeCognome){
-  if (nomeCognome.match(/\d/) || nomeCognome.match(/[^a-zA-Z\d]/)) { //vuol dire che contiene numeri o caratteri speciali
+  if (nomeCognome.match(/\d/) || nomeCognome.match(/[^a-zA-Z\d]/)) { 
     throw new Error("Assicurati di aver usato solo lettere");
-    return false;
   }
   return true;
 }
-
 
 const createUser = asyncHandler(async (req, res) => {
     const nomeCognome = req.body.nomeCognome;
@@ -81,62 +78,32 @@ const createUser = asyncHandler(async (req, res) => {
     const telefono = req.body.telefono;
     const password = req.body.password;
     const checkPassword = req.body.checkPassword;
-
-    console.log(nomeCognome, email, telefono, password, checkPassword);
-
-    //var verifica = false;
     
     const findUser = await User.findOne({email: email});
     const findNumber = await User.findOne({telefono: telefono});
-
-
-    
-
-    //console.log(telefono.length);
-    //console.log(telefono.charAt(0));
-    console.log(telefono.length);
 
 
     checkNome(nomeCognome);
     checkPasswordStrength(password);
     checkPasswords(password, checkPassword);
     checkTelefono(telefono);
+    checkIfEmailInString(email);
 
     
 
     if(!findUser && !findNumber) {
-        //create a new user
-        //const newUser = await User.create(req.body);
         const newUser = await User.create(req.body);
-        //newUser = await newUser.save();
         res.redirect("../../index2.html");
         console.log("Utente creato con successo");
-
-        
-        
-
-    }
- 
-    else {
-        //user already exists
-        //res.json({
-        //    msg:"User already exists",
-        //    success: false,
-        //});
+    }else {
         throw new Error("User Already Exists");
     }
 
 });
 
-//login controller
-
 const loginUserCtrl = asyncHandler(async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    //console.log(email);
-    //const {email, password} = req.body;
-    //console.log(email);
-    //check if user exists
     const findUser = await User.findOne({email: email});
     if(!findUser){
       throw new Error("Email non valida. Crea un nuovo account.");
@@ -148,9 +115,7 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
     }
 })
 
-
 const checkUsers = asyncHandler(async (req, res) => {
-  
   try{
     const users = await User.find();
     res.json(users);
@@ -160,11 +125,8 @@ const checkUsers = asyncHandler(async (req, res) => {
   }
 });
 
-
 const checkAUser = asyncHandler(async (req, res) => {
   const {email, password} = req.body;
-  //const findUser = await User.findOne({email: email});
-
   try{
     const findUser = await User.findOne({email: email});
     res.json(findUser);
@@ -174,21 +136,4 @@ const checkAUser = asyncHandler(async (req, res) => {
   }
 });
 
-
-//TODO
-//next step: capire jwt
-
-//fare una get per gli amministratori, cosicche possano prendersi il numero dell'utente in caso di pericolo
-//capire come fare un altro modello per i loggati, che avranno la posizione (anche qui POST/GET)
-
-//il PUT per modifica password
-
-
-//per fare GET di ogni singolo utente, nel modello devo mettere un parametro "index"
-//e una funzione che ogni volta che si aggiunge un utente incrementa una variabile di 1, cosi
-//da rendere piu facile la ricerca .../utenti/index=1 (esempio)
-
-
 module.exports = {createUser, loginUserCtrl, checkUsers, checkAUser};
-
-

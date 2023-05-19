@@ -7,7 +7,7 @@ const dcConnect = () => {
         //const conn = mongoose.connect("mongodb+srv://andreivoinea:nNtbdh6ZTWB9Xclr@treksec1.lfljmoa.mongodb.net/?authSource=TrekSec1&authMechanism=SCRAM-SHA-1", {
         //    useNewUrlParser: true, useUnifiedTopology: true
         //})
-        const conn = mongoose.connect("mongodb+srv://andreivoinea:nNtbdh6ZTWB9Xclr@treksec1.lfljmoa.mongodb.net/?authSource=TrekSec1&authMechanism=SCRAM-SHA-1");
+        const conn = mongoose.connect(process.env.MONGODB_URL);
         console.log("DB connected succesfully!");
     }
     catch(error){
