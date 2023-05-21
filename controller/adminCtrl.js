@@ -9,17 +9,34 @@ const asyncHandler = require("express-async-handler");
 const loginAdminCtrl = asyncHandler(async (req, res) => {
     const admin_email = req.body.admin_email;
     const admin_password = req.body.admin_password;
+    const Admin_type = {
+
+        Moderator: "moderator",
+        CallCenter: "callCenter",
+        TecnicalSupport: "tecnicalSupport"
+    }
+
+    const admin_type_second = req.body.admin_type;
    
     //check if admin exists
     const findAdmin = await Admin.findOne({admin_email: admin_email});
     if(!findAdmin){
       throw new Error("Email non valida.");
-    }
+    }html
     if(findAdmin && (await findAdmin.isPasswordMatched(admin_password))){
-        res.redirect("../../map.html");
+        
     }else{
         throw new Error("Password errata. Si prega di riprovare.");
     }
+
+    switch(admin_type_second){
+
+      case Admin_type.CallCenter : console.log("hi CallCenter") && res.redirect("../../CallCenter.html"); break;
+      case Admin_type.Moderator : console.log("hi Moderator") && res.redirect("../../Moderator.html") ; break;
+      case Admin_type.TecnicalSupport : console.log("Hi TecnicalSupport") && res.redirect("../../tecnicalSupport.html"); break;
+      
+    }
+
 })
 
 
@@ -62,9 +79,7 @@ const checkAAdmin = asyncHandler(async (req, res) => {
 //e una funzione che ogni volta che si aggiunge un utente incrementa una variabile di 1, cosi
 //da rendere piu facile la ricerca .../utenti/index=1 (esempio)
 
-document.getElementById("buttonAdmin").addEventListener("click", function() {
-    window.location.href = "homeAdmin.html";
-  });
+
 
 module.exports = {loginAdminCtrl, checkAdmin, checkAAdmin};
 
