@@ -93,7 +93,7 @@ const createUser = asyncHandler(async (req, res) => {
 
     if(!findUser && !findNumber) {
         const newUser = await User.create(req.body);
-        res.redirect("../../index2.html");
+        res.redirect("../../login.html");
         console.log("Utente creato con successo");
     }else {
         throw new Error("User Already Exists");

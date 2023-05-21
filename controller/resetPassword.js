@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const { checkPasswordStrength, checkPasswords } = require('./userCtrl');
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const nodeMailer = require('nodemailer');
@@ -28,7 +29,7 @@ const checkUserExistence = asyncHandler(async (req, res) => {
           link : 'https://mailgen.js/'
         }
     })
-
+    
     let response = {
         body: {
             name: 'This is TrekSec app',
@@ -66,9 +67,62 @@ const checkUserExistence = asyncHandler(async (req, res) => {
     }
 })
 
+const getPage = asyncHandler(async (req, res) => {
+  const { id, token } = req.params;
+  console.log(req.params);
+  const mail = req.body.mail;
+  console.log(mail);
+  const findUser = await User.findOne({ _id: id });
+  if (!findUser) {
+    return res.json({ status: "User Not Exists!!" });
+  }
+  const secret = process.env.JWT_SECRET + findUser.password;
+  try {
+    const verify = jwt.verify(token, secret);
+    res.redirect("/newPassword.html").json({
+      self: '../../newPassword/' + findUser.id + token,
+  });
+  } catch (error) {
+    console.log(error);
+    res.send("Your time to change ehte password expired, please reask to change it");
+  }
+});
+
 const changePassword = asyncHandler(async (req, res) => {
-    
+  const { id, token } = req.params;
+  const password = req.body.password;
+  const checkPassword = req.body.checkPassword;
+
+  const findUser = await User.findOne({ _id: id });
+  if (!findUser) {
+    return res.json({ status: "User Not Exists!!" });
+  }
+  const secret = process.env.JWT_SECRET + findUser.password;
+  try {
+    const verify = jwt.verify(token, secret);
+
+    checkPasswordStrength(password);
+    checkPasswords(password, checkPassword);
+
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    await User.updateOne({
+                          _id: id,
+                        }, {
+                          $set: {
+                            password: encryptedPassword,
+                          },
+                        });
+
+  //res.render("login", { email: verify.email, status: "verified" });
+    res.redirect("/login.html").json({
+      self: '../../login/',
+      email: verify.email
+  });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "Something Went Wrong" });
+  }
   });
 
 
-module.exports = {checkUserExistence, changePassword};
+module.exports = {checkUserExistence, changePassword, getPage};
