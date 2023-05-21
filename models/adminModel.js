@@ -13,12 +13,20 @@ var adminSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+
+    admin_type:{
+
+        type:String,
+        enum : ['callCenter', 'moderator', 'tecnicalSupport'],
+        default : 'tecnicalSupport',
+    },
     
 });
 
 adminSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSaltSync(10);
     this.admin_password = await bcrypt.hash(this.admin_password, salt);
+
 });
 
 
