@@ -25,8 +25,13 @@ const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 
 const router = require('./routes/authRoute');
+const router_admin = require('./routes/adminRoute');
+
+
 
 const authRouter = require("./routes/authRoute");
+const adminRouter = require("./routes/adminRoute");
+
 const bodyParser = require('body-parser');
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
@@ -38,10 +43,27 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
+   //res.send("Hello from server side");
+   //res.redirect("index2.html");
+   console.log("hi");
    res.redirect("home.html");
 })
+/*
+app.set("view engine", "hbs");
+app.set("views", templatePath);
+
+app.get("/login", (req, res) => {
+   res.render("login");
+   console.log("ciao");
+})
+*/
+
+
 
 app.use("/api/user", authRouter);
+app.use("/api/admin", adminRouter);
+
+
 
 app.use(notFound);
 app.use(errorHandler);
