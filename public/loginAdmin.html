@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
 		<title>Login</title>
-		<link rel="stylesheet" href="loginAdmin.css">
+		<link rel="stylesheet" href="loginAdmin.css"
 	</head>
 	<body>
 		<div class="loginAd">
@@ -27,9 +27,12 @@
 					</div>
 					<input type="password" name="password" placeholder="Password" id="password" class="logAd" style="border-color: black;" required><br>
 			</div>
-
+			
+			<form action="/api/admin/loginAdminCtrl" method="post">
             <input type="submit" value="Login" class="button-Ad" style="background-color: black; color:  white">
-            </div>
+			</form>
+		
+		</div>
 		</div>
 
 
