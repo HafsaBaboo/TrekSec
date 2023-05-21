@@ -31,9 +31,9 @@ const loginAdminCtrl = asyncHandler(async (req, res) => {
 
     switch(admin_type_second){
 
-      case Admin_type.CallCenter : console.log("hi CallCenter") && res.redirect("../../CallCenter.html"); break;
-      case Admin_type.Moderator : console.log("hi Moderator") && res.redirect("../../Moderator.html") ; break;
-      case Admin_type.TecnicalSupport : console.log("Hi TecnicalSupport") && res.redirect("../../tecnicalSupport.html"); break;
+      case Admin_type.CallCenter : console.log("hi CallCenter") ; res.redirect("../../CallCenter.html"); break;
+      case Admin_type.Moderator : console.log("hi Moderator"); res.redirect("../../Moderator.html") ; break;
+      case Admin_type.TecnicalSupport : console.log("Hi TecnicalSupport"); res.redirect("../../tecnicalSupport.html"); break;
       
     }
 
