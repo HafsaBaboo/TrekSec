@@ -67,7 +67,7 @@ paths:
             schema:
               type: object
       responses:
-        '201':
+        '200':
           description: 'Register'
           content:
             application/json:
@@ -115,7 +115,7 @@ paths:
                   type: string
                   description: 'Password of the utente'
       responses:
-        '200':
+        '201':
           description: 'Login'
           content:
             application/json:
@@ -140,7 +140,7 @@ paths:
                   type: string
                   description: 'Email adress'
       responses:
-        '200':
+        '201':
           description: 'Login'
           content:
             application/json:
@@ -182,7 +182,7 @@ paths:
                   type: string
                   description: 'Email adress'
       responses:
-        '200':
+        '201':
           description: 'Login'
           content:
             application/json:
