@@ -1,5 +1,5 @@
 const express = require('express');
-const { loginAdminCtrl} = require('../controller/adminCtrl');
+const {createAdmin, loginAdminCtrl, checkAdmin, checkAAdmin} = require('../controller/adminCtrl');
 const router = express.Router();
 
 router.get("/",(req,res)=>{
@@ -10,6 +10,7 @@ router.get("/loginAdmin",(req,res)=>{
     res.redirect("../../loginAdmin.html");
 })  
 
+router.post('/regAdmin', createAdmin);
 router.post('/loginAdminCtrl', loginAdminCtrl);
 
 module.exports = router;
