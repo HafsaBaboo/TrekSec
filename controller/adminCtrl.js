@@ -2,10 +2,34 @@ const generateToken = require("../config/jwtToken");
 const Admin = require("../models/adminModel");
 const asyncHandler = require("express-async-handler");
 
+const Type = {
+  Moderator: "moderator",
+  CallCenter: "callCenter",
+  TecnicalSupport: "tecnicalSupport"
+}
 
+//To create an admin, it is necessary to use POSTMAN
+const createAdmin = asyncHandler(async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const tipo = req.body.admin_type;
+
+  if(tipo != Type.Moderator && tipo != Type.CallCenter && tipo != Type.TecnicalSupport){
+    throw new Error("Error: Type of admin not found! Possible choices: [moderator],[callCenter],[tecnicalSupport]");
+  }
+
+  const findUser = await Admin.findOne({email: email});
+  
+  if(!findUser) {
+      const newUser = await Admin.create(req.body);
+      res.redirect("../../loginAdmin.html");
+      console.log("Admin Created Succesfully!");
+  }else {
+      throw new Error("Error: Admin Already Exists!");
+  }
+})
 
 //login controller
-
 const loginAdminCtrl = asyncHandler(async (req, res) => {
     const admin_email = req.body.admin_email;
     const admin_password = req.body.admin_password;
@@ -54,6 +78,7 @@ const checkAdmin = asyncHandler(async (req, res) => {
 
 const checkAAdmin = asyncHandler(async (req, res) => {
   const {admin_email, admin_password} = req.body;
+  //const findUser = await User.findOne({email: email});
 
   try{
     const findAdmin = await Admin.findOne({admin_email: admin_email});
@@ -64,4 +89,6 @@ const checkAAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = {loginAdminCtrl, checkAdmin, checkAAdmin};
+module.exports = {createAdmin, loginAdminCtrl, checkAdmin, checkAAdmin};
+
+
