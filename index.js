@@ -43,22 +43,8 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-   //res.send("Hello from server side");
-   //res.redirect("index2.html");
-   console.log("hi");
    res.redirect("home.html");
 })
-/*
-app.set("view engine", "hbs");
-app.set("views", templatePath);
-
-app.get("/login", (req, res) => {
-   res.render("login");
-   console.log("ciao");
-})
-*/
-
-
 
 app.use("/api/user", authRouter);
 app.use("/api/admin", adminRouter);
@@ -67,9 +53,6 @@ app.use("/api/admin", adminRouter);
 
 app.use(notFound);
 app.use(errorHandler);
-
-//npm i express-async handler
-// i import it into "/controller/userCtrl"
 
 app.listen(PORT, () => {
    console.log(`Server is running at PORT ${PORT}`);

@@ -54,7 +54,6 @@ const checkAdmin = asyncHandler(async (req, res) => {
 
 const checkAAdmin = asyncHandler(async (req, res) => {
   const {admin_email, admin_password} = req.body;
-  //const findUser = await User.findOne({email: email});
 
   try{
     const findAdmin = await Admin.findOne({admin_email: admin_email});
@@ -65,22 +64,4 @@ const checkAAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-
-//TODO
-//next step: capire jwt
-
-//fare una get per gli amministratori, cosicche possano prendersi il numero dell'utente in caso di pericolo
-//capire come fare un altro modello per i loggati, che avranno la posizione (anche qui POST/GET)
-
-//il PUT per modifica password
-
-
-//per fare GET di ogni singolo utente, nel modello devo mettere un parametro "index"
-//e una funzione che ogni volta che si aggiunge un utente incrementa una variabile di 1, cosi
-//da rendere piu facile la ricerca .../utenti/index=1 (esempio)
-
-
-
 module.exports = {loginAdminCtrl, checkAdmin, checkAAdmin};
-
-
