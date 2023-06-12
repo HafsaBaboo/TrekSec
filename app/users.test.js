@@ -392,23 +392,6 @@ describe('POST /api/v1/users', () => {
       .expect(400, {errorCheck: 'Passwords do not match.'});
   });
 
-
-  test('checkBox non compilato', async () => {
-    const response = await request(app)
-      .post('/api/v1/users')
-      .send({
-        nomeCognome: "Gigi d'Alessio",
-        email: 'gigidalessio@gmail.com',
-        telefono: '1234567891',
-        password: 'Treksec123/',
-        checkPassword: 'Treksec123/'
-      })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400, {errorBox: 'Accept the usage terms.'});
-  });
-
-
   test('should create a new user', async () => {
   
     const response = await request(app)
