@@ -76,7 +76,9 @@ describe('POST /api/v1/users', () => {
     email: 'provatesting@gmail.com',
     telefono: '9098765430',
     password: 'Password123/',
-    checkPassword: 'Password123/'
+    checkPassword: 'Password123/',
+    chx: true
+
   };
 
   let finalUser = {
@@ -84,7 +86,8 @@ describe('POST /api/v1/users', () => {
     email: 'gigidalessio@gmail.com',
     telefono: '1234567891',
     password: 'Trekse1/',
-    checkPassword: 'Trekse1/'
+    checkPassword: 'Trekse1/',
+    chx: true
   };
 
   beforeAll(async () => {
@@ -145,7 +148,8 @@ describe('POST /api/v1/users', () => {
         email: "",
         telefono: "",
         password: "",
-        checkPassword: ""
+        checkPassword: "",
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -160,7 +164,8 @@ describe('POST /api/v1/users', () => {
         email: "",
         telefono: "",
         password: "",
-        checkPassword: "" 
+        checkPassword: "" ,
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -175,7 +180,8 @@ describe('POST /api/v1/users', () => {
         email: "",
         telefono: "1234567891",
         password: "",
-        checkPassword: ""
+        checkPassword: "",
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -191,7 +197,8 @@ describe('POST /api/v1/users', () => {
         email: "gigidalessio@gmail.com",
         telefono: "1234567891",
         password: "",
-        checkPassword: ""
+        checkPassword: "",
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -208,7 +215,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1234567891',
         password: 'Trekse1/',
-        checkPassword: 'Trekse1/'
+        checkPassword: 'Trekse1/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -224,7 +232,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1342easd12',
         password: 'Trekse1/',
-        checkPassword: 'Trekse1/'
+        checkPassword: 'Trekse1/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -241,7 +250,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '12345678903',
         password: 'Trekse1/',
-        checkPassword: 'Trekse1/'
+        checkPassword: 'Trekse1/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -257,7 +267,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '123456789',
         password: 'Trekse1/',
-        checkPassword: 'Trekse1/'
+        checkPassword: 'Trekse1/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -274,7 +285,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessiogmail.com',
         telefono: '1234567891',
         password: 'Trekse1/',
-        checkPassword: 'Trekse1/'
+        checkPassword: 'Trekse1/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -291,7 +303,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail',
         telefono: '1234567891',
         password: 'Trekse1/',
-        checkPassword: 'Trekse1/'
+        checkPassword: 'Trekse1/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -307,7 +320,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1234567891',
         password: 'trek',
-        checkPassword: 'trek'
+        checkPassword: 'trek',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/);
@@ -329,7 +343,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1234567891',
         password: 'trek12',
-        checkPassword: 'trek12'
+        checkPassword: 'trek12',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/);
@@ -349,7 +364,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1234567891',
         password: 'Trek12',
-        checkPassword: 'Trek12'
+        checkPassword: 'Trek12',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/);
@@ -368,7 +384,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1234567891',
         password: 'Trek12/',
-        checkPassword: 'Trek12/'
+        checkPassword: 'Trek12/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/);
@@ -386,7 +403,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1234567891',
         password: 'Treksec12/',
-        checkPassword: 'Treksec12'
+        checkPassword: 'Treksec12',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -402,7 +420,8 @@ describe('POST /api/v1/users', () => {
         email: 'gigidalessio@gmail.com',
         telefono: '1234567891',
         password: 'Treksec123/',
-        checkPassword: 'Treksec123/'
+        checkPassword: 'Treksec123/',
+        chx: false  
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
