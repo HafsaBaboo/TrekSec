@@ -93,7 +93,13 @@ router.post('', async function (req, res, next) {
   if(checkPasswords(content.password, content.checkPassword)) {
     return res.status(400).json({errorCheck: 'Passwords do not match.'});
   }
- 
+  
+  if (!content.chx) {
+    // Checkbox is checked
+    return res.status(400).json({errorBox: 'Accept the usage terms.'});
+
+  }
+  
   // Se tutte le condizioni precedenti vengono soddisfatte, si procede con la creazione dell'utente
   try{
       let newUser = await User.create(content);
