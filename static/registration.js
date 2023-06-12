@@ -16,6 +16,7 @@ function registration()
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var checkPassword = document.getElementById("checkPassword").value;
+    var chx = document.getElementById("checkbox").checked;
 
     fetch('../api/v1/users', {
         method: 'POST',
@@ -25,7 +26,8 @@ function registration()
             telefono: telefono,
             email: email, 
             password: password,
-            checkPassword: checkPassword
+            checkPassword: checkPassword,
+            chx: chx
          } ),
     })
     .then((resp) => {
