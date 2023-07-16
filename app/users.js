@@ -88,7 +88,8 @@ router.post('', async function (req, res, next) {
     return res.status(400).json({ errorTelefono: 'Insert 10 digits.'});
   }
 
-  //Controllo se è corretto e avviso riguardo la correttezza
+
+  //Controllo se sono corretti numero di telelfono e user e avviso riguardo la correttezza
   if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
      && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) ) {
     return res.status(200).json({ errorTelefono: 'go to the next check number.'});

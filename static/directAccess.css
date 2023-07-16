@@ -21,6 +21,7 @@
   font-size: 60px;
 }
 
+
 .map {
   width: 100%;
   height: 100vh;
@@ -34,10 +35,6 @@
   display: flex;
 }
 
-.overlay_segn.active{
-
-  display: flex;
-}
 
 .overlay {
   position: absolute;
@@ -52,22 +49,6 @@
   z-index: 2;
 }
 
-.overlay_segn{
-
-  position: absolute;
-  top: 200px;
-  left: 188px;
-  width: 80%;
-  height: 70%;
-  background-color: rgba(255, 255, 255, 0.871);
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 4;
-
-
-}
 
 .opzioni{
 
@@ -100,9 +81,6 @@
   padding-top: 30px;
   padding-bottom: 3px;
   padding-right: 400px;
-
-  
-  
   
 }
 
@@ -110,7 +88,9 @@
 
   display: flex;
   flex-direction: row;
-  padding-top: 700px;
+  padding-top: 900px;
+  justify-content: center;
+  align-items: center;
 
 }
 
@@ -120,33 +100,3 @@
   margin-bottom: 15px;
   
 }
-
-.overlay-button2{
-
-  margin-top: 5px;
-  margin-bottom: 5px;
-  
-  
-}
-
-.overlay-button4{
-
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.overlay-button6{
-
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.overlay-button8{
-
-  margin-left: 100px;
-
-}
-
-
-
-
