@@ -224,6 +224,43 @@ describe('POST /api/v1/users', () => {
 
   });
 
+  test('nome corretto',async () =>{
+
+    const respose = await request(app)
+    .post('/api/v1/users')
+    .send({
+        nomeCognome: 'Gigi Alessio',
+        email: 'gigidalessio@gmail.com',
+        telefono: '1234567891',
+        password: 'Trekse1/',
+        checkPassword: 'Trekse1/',
+        chx: false 
+
+    })
+    .set('Accept', 'application/json')
+    .expect('Content-Type',/json/)
+    .expect(200,{errorNome: 'go to the next check.'})
+
+  });
+
+  test('numero corretto', async () =>{
+
+    const respose = await request(app)
+    .post('/api/v1/users')
+    .send({
+      nomeCognome: 'Gigi Alessio',
+      email: 'gigidalessio@gmail.com',
+      telefono: '2343289456',
+      password: 'Trekse1/',
+      checkPassword: 'Trekse1/',
+      chx: false 
+
+    })
+    .set('Accept','application/json')
+    .expect('Content-Type',/json/)
+    .except(200,{errorNome: 'go to the next check number.'})
+  });
+
   test('telefono non valido', async () => {
     const response = await request(app)
       .post('/api/v1/users')

@@ -72,6 +72,12 @@ router.post('', async function (req, res, next) {
     return res.status(400).json({ errorNome: 'Insert only letters.'});
   }
 
+  //controllo e notifico che il nome è stato digitato correttamente
+  if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser){
+
+    return res.status(200).json({ errorNome: 'go to the next check.'});
+  }
+
   // Controllo e notifico un'eventuale presenza di caratteri che non siano cifre nel campo "telefono"
   if(checkTelefonoValid(content.telefono)) {
     return res.status(400).json({ errorTelefono: 'Insert only digits.'});
@@ -80,6 +86,13 @@ router.post('', async function (req, res, next) {
   // Controllo e notifico un'eventuale anomalia nel numero di cifre inserito nel campo "telefono"
   if(checkTelefonoLength(content.telefono)) {
     return res.status(400).json({ errorTelefono: 'Insert 10 digits.'});
+  }
+
+
+  //Controllo se sono corretti numero di telelfono e user e avviso riguardo la correttezza
+  if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
+     && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) ) {
+    return res.status(200).json({ errorTelefono: 'go to the next check number.'});
   }
 
   // Controllo e notifico un'eventuale assenza di caratteri validi nel campo "email"
