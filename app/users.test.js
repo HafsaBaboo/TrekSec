@@ -349,6 +349,24 @@ describe('POST /api/v1/users', () => {
     
   });
 
+  test('email corretta', async () =>{
+
+    const respose = await request(app)
+    .post('/api/v1/users')
+    .send({
+      nomeCognome: 'Gigi Alessio',
+      email: 'gigidalessio@gmail.com',
+      telefono: '2343289456',
+      password: 'Trekse1/',
+      checkPassword: 'Trekse1/',
+      chx: false 
+
+    })
+    .set('Accept','application/json')
+    .expect('Content-Type',/json/)
+    .except(200,{errorNome: 'go to the next check email.'})
+  });
+
   test('password non valida', async () => {
     const response = await request(app)
       .post('/api/v1/users')
@@ -432,6 +450,8 @@ describe('POST /api/v1/users', () => {
 
   });
 
+
+
   test('password e checkPassword non concordi', async () => {
     const response = await request(app)
       .post('/api/v1/users')
@@ -448,6 +468,23 @@ describe('POST /api/v1/users', () => {
       .expect(400, {errorCheck: 'Passwords do not match.'});
   });
 
+  test('password corretta', async () =>{
+
+    const respose = await request(app)
+    .post('/api/v1/users')
+    .send({
+      nomeCognome: 'Gigi Alessio',
+      email: 'gigidalessio@gmail.com',
+      telefono: '2343289456',
+      password: 'Trekse1/',
+      checkPassword: 'Trekse1/',
+      chx: false 
+
+    })
+    .set('Accept','application/json')
+    .expect('Content-Type',/json/)
+    .except(200,{errorNome: 'go to the next check password.'})
+  });
 
   test('checkBox non compilato', async () => {
     const response = await request(app)
@@ -463,6 +500,24 @@ describe('POST /api/v1/users', () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400, {errorBox: 'Accept the usage terms.'});
+  });
+
+  test('registrazione avvenuta', async () =>{
+
+    const respose = await request(app)
+    .post('/api/v1/users')
+    .send({
+      nomeCognome: 'Gigi Alessio',
+      email: 'gigidalessio@gmail.com',
+      telefono: '2343289456',
+      password: 'Trekse1/',
+      checkPassword: 'Trekse1/',
+      chx: true 
+
+    })
+    .set('Accept','application/json')
+    .expect('Content-Type',/json/)
+    .except(200,{errorNome: 'user registration success.'})
   });
 
 

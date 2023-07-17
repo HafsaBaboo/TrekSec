@@ -88,8 +88,7 @@ router.post('', async function (req, res, next) {
     return res.status(400).json({ errorTelefono: 'Insert 10 digits.'});
   }
 
-
-  //Controllo se sono corretti numero di telelfono e user e avviso riguardo la correttezza
+  //Controllo se è corretto e avviso riguardo la correttezza
   if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
      && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) ) {
     return res.status(200).json({ errorTelefono: 'go to the next check number.'});
@@ -99,22 +98,50 @@ router.post('', async function (req, res, next) {
   if(checkIfEmailInString(content.email)) {
     return res.status(400).json({ errorEmail: 'Not a valid email.'});
   }
+
+  //Controllo se è corretto e avviso riguardo la correttezza
+  if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
+     && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) 
+     && !(content.email.length === 0) && !checkIfEmailInString(content.email)) {
+    
+      return res.status(200).json({ errorEmail: 'go to the next check email.'});
+  }
   
   // Controllo e notifico un'eventuale tentativo di salvataggio di una password debole nel campo "password"
   if(checkPasswordStrength(content.password) && risp.length > 0) {
     return res.status(400).json({errorsPassword: risp});
   }
 
+
   // Controllo e notifica un'eventuale anomalia tra i campi "password" e "checkPassword"
   if(checkPasswords(content.password, content.checkPassword)) {
     return res.status(400).json({errorCheck: 'Passwords do not match.'});
   }
   
+  //Controllo se è corretto e avviso riguardo la correttezza
+  if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
+     && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) 
+     && !(content.email.length === 0) && !checkIfEmailInString(content.email)
+     && !(content.password.length === 0) && !checkPasswordStrength(content.password) && !checkPasswords(content.password, content.checkPassword)) {
+    
+      return res.status(200).json({ errorsPassword: 'go to the next check password.'});
+  }
+
   if (!content.chx) {
     // Checkbox is checked
     return res.status(400).json({errorBox: 'Accept the usage terms.'});
 
   }
+
+   //Controllo se è corretto e avviso riguardo la correttezza
+   if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
+   && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) 
+   && !(content.email.length === 0) && !checkIfEmailInString(content.email)
+   && !(content.password.length === 0) && !checkPasswordStrength(content.password) && !checkPasswords(content.password, content.checkPassword)
+   && content.chx) {
+  
+    return res.status(200).json({ errorBox: 'user registration success.'});
+}
   
   // Se tutte le condizioni precedenti vengono soddisfatte, si procede con la creazione dell'utente
   try{
