@@ -312,7 +312,7 @@ router.post('/reset-password',  async (req, res) => {
     { new: true }
   );
 
-  const resetLink = `http://localhost:8080/newPassword.html?token=${token}`;
+  const resetLink = `https://treksec.onrender.com/newPassword.html?token=${token}`;
   sendMailF(findUser.email, resetLink);
 
   return res.json({token});
