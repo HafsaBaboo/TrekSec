@@ -3,6 +3,7 @@ const app = express();
 //const cors = require('cors')
 
 const authentication = require('./authentication.js');
+const authenticationAdmin = require('./authenticationAdmin.js');
 const tokenChecker = require('./tokenChecker.js');
 
 const admins = require('./admins.js');
@@ -33,6 +34,7 @@ app.use((req,res,next) => {
  * Authentication routing and middleware
  */
 app.use('/api/v1/authentications', authentication);
+app.use('/api/v1/authenticationsAdmin', authenticationAdmin);
 
 
 /**
