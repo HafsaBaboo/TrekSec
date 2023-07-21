@@ -201,6 +201,16 @@ router.get('/:id/coordinates', async (req, res) => {
   });
 });
 
+//Operazione che permette al CallCenter di identificare le coordinate dell'utente, in caso di pericolo
+router.get('/:id/coordinatesCall',async(req,res)=>{
+  let user = await User.findById(req.params.id);
+  return res.status(200).json({
+    self : '/api/v1/users/' + user.id,
+    telefono : user.telefono,
+    lat: user.coordX,
+    long : user.coordY
+  });
+});
 
 router.delete('/:id', async (req, res) => {
     let user = await User.findById(req.params.id);
