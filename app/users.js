@@ -5,6 +5,7 @@ const User = require('./models/user'); // get our mongoose model
 const jwt = require("jsonwebtoken");
 const nodeMailer = require('nodemailer');
 const Mailgen = require('mailgen');
+const user = require('./models/user');
 
 var risp = [];
 
@@ -199,6 +200,41 @@ router.get('/:id/coordinates', async (req, res) => {
       lat: user.coordX,
       long: user.coordY
   });
+});
+
+
+router.get('/telefoni', async (req, res) => {
+  let users = await User.find();;
+  // In particolare, per ogni utente, verranno stampati i campi "self", "telefono", "coordinate"
+  users = users.map((entry) => ({
+    self: '/api/v1/users/telefoni/' + entry.telefono,
+    telefono: entry.telefono,
+    coordX: entry.coordX,
+    coordY: entry.coordY
+  }));
+  return res.status(200).json(users); 
+});
+
+
+router.get('/telefoni/:telefono', async (req, res) => {
+
+  const telefono = req.params.telefono;
+
+  if (req.params.telefono) {
+      const findUser = await User.findOne({telefono: telefono});
+
+      console.log(findUser.id);
+      return res.status(200).json({
+          self: '/api/v1/users/' + findUser.id,
+          telefono: findUser.telefono,
+          coordX: findUser.coordX,
+          coordY: findUser.coordY
+      });
+
+  } else {
+    return res.status(400).json({ error: 'Numero di telefono non valido' });
+  }
+  
 });
 
 
