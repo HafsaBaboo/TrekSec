@@ -1,41 +1,47 @@
-var searchA = {};
+var foundUser = {};
 var data = '';
 
-function getUserCOordinates(){
+function goMap(){
+  var telefono = document.getElementById("NumeroTelefono").value;
+  console.log(telefono);
 
-    var telefono = document.getElementById("NumeroTelefono").value;
+  const url = `../api/v1/users/telefoni/${telefono}`;
 
-    fetch('../api/v1/users',{
+  console.log(url);
 
-        method:'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({telefono:telefono}),
-      
-      })
-      .then((resp) => {
-        data = resp.json();
-        return data;
-      })
+  fetch(url, {
+    method: 'GET'
+  })
 
-      .then(function(data){
-        if(data.success){
+  .then((resp) => {
+      data = resp.json();
+      return data;
+  })
 
-            //save the coordinates of the user for future use
-            sessionStorage.setItem('userCoordinates', JSON.stringify({ coordX: data.coordX, coordY: data.coordY }));
-            Enter(data.success);
-        }else{
+.then(function(data) { // Here you get the data to modify as you please
+  foundUser.self = data.self;
+  foundUser.telefono = data.telefono;
+  foundUser.coordX = data.coordX;
+  foundUser.coordY = data.coordY;
+  console.log(data);
 
-            alert("telephone number not find in the database.");
-        }
-      })
-    .catch(error=> console.error(error));
+  sessionStorage.setItem('userCoordinates', JSON.stringify({ coordX: data.coordX, coordY: data.coordY }));
+  Enter(data.success );
+
+})
+
+.catch(error => console.error(error));
+};
+
+function goBack() {
+  window.location.href = "../";
 }
 
 function Enter(dato){
 
-  if(dato === true){
+  if( dato === true ){
     window.location.href = "./MapCall.html";
-    
+  
   }else{
     console.log("L'utente non è stato autenticato correttamente. Gestisci l'errore appropriatamente.");
   }
