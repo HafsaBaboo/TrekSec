@@ -141,6 +141,21 @@ input.larger {
 
 }
 
+.bottoni{
+
+  display: flex;
+  flex-direction: row;
+  padding-top: 27px;
+
+}
+
+.clickFiltro{
+
+  font-size: 30px;
+  margin-top: 0px;
+
+}
+
 .testo{
 
   margin-top: 5px;
