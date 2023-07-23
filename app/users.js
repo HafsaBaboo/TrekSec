@@ -15,7 +15,8 @@ router.get('', async (req, res) => {
   // In particolare, per ogni utente, verranno stampati i campi "self" ed "email"
   users = users.map((entry) => ({
     self: '/api/v1/users/' + entry.id,
-    email: entry.email
+    email: entry.email,
+    telefono: entry.telefono
   }));
 
   return res.status(200).json(users);
@@ -228,7 +229,8 @@ router.get('/telefoni/:telefono', async (req, res) => {
           self: '/api/v1/users/' + findUser.id,
           telefono: findUser.telefono,
           coordX: findUser.coordX,
-          coordY: findUser.coordY
+          coordY: findUser.coordY,
+          success: true
       });
 
   } else {

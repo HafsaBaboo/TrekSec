@@ -1,7 +1,7 @@
 var foundUser = {};
 var data = '';
 
-function showUserPosition(){
+function goMap(){
   var telefono = document.getElementById("NumeroTelefono").value;
   console.log(telefono);
 
@@ -24,6 +24,10 @@ function showUserPosition(){
   foundUser.coordX = data.coordX;
   foundUser.coordY = data.coordY;
   console.log(data);
+
+  sessionStorage.setItem('userCoordinates', JSON.stringify({ coordX: data.coordX, coordY: data.coordY }));
+  Enter(data.success );
+
 })
 
 .catch(error => console.error(error));
@@ -31,4 +35,15 @@ function showUserPosition(){
 
 function goBack() {
   window.location.href = "../";
+}
+
+function Enter(dato){
+
+  if( dato === true ){
+    window.location.href = "./MapCall.html";
+  
+  }else{
+    console.log("L'utente non è stato autenticato correttamente. Gestisci l'errore appropriatamente.");
+  }
+  return;
 }
