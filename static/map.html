@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="map.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script src="map.js"></script>s
 </head>
 <body>
     
@@ -15,6 +16,16 @@
             <div class="colonna">
             <h1 style="text-decoration: underline; font-style: Baskerville; color: black;" class="testo"; id="testo">Widgets</h1>
             <button class="overlay-button"  onclick="Filtra()" style="background-color: white; color:  black; width: 600px; height: 90px; font-size: 60px; ">Filtro<img src="https://www.mondomobileweb.it/wp-content/uploads/2016/07/timextra-1.jpg" alt="immagine1" class="img_fil" height="70px" width="70px"></button>
+            <div class="overlay_filtri">
+                <label>Filtri</label>
+                <dl class="checkboxes">
+                    <dt><input type="checkbox" id="orso" class="larger"> orso</dt>
+                    <dt><input type="checkbox" id="incendio" class="larger"> incendio</dt>
+                    <dt><input type="checkbox" id="valanga" class="larger"> valanga</dt>
+                    <dt><input type="checkbox" id="zonaDiCaccia" class="larger"> zona di caccia</dt>
+                </dl>            
+                  <button style="font-size: 50px; height: 90px; width: 500px; background-color: black; color: white;" onclick="getPericoli()">Filtra </button>
+            </div>
             <button class="overlay-button2" onclick="Segnala_Func()" style="background-color: white; color:  black; width: 600px; height: 90px; font-size: 60px;">Segnala<img src="https://thumbs.dreamstime.com/z/uomo-con-il-megafono-21757168.jpg" alt="Immagine" class="img_segn" height="70px" width="70px"></button>
             <div class="overlay_segn">
                 <select class="opzioni" id="opzioni" style="font-size: 50px; height: 90px; width: 500px; ">
