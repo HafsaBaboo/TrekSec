@@ -24,7 +24,7 @@ function getPericoli(){
     console.log("zonaDiCaccia = " + zonaDiCaccia);
 
     if(orso == true){
-        fetch(`../api/v1/dangers/orsi`, {
+        fetch(`../api/v1/dangers/orso`, {
             method: 'GET'
         })
         .then((resp) => {
