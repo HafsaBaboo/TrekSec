@@ -23,6 +23,7 @@ function getReports(){
   .then(function(data){
     const jsonContainer = document.getElementById('json-container');
     //essendo che l'output è un array di pericoli, viene analizzato un pericolo alla volta
+    console.log(data.length);
     data.forEach(element => {
       const id = element.id;
       let container = dangerIDs[id];
