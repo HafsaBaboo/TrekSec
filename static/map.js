@@ -102,5 +102,5 @@ function getPericoli(){
 
 function Sos_Button(){
 
-    window.location.href = "tel:123456789";
+    window.location.href = "tel:3487156282"; //number of one of the member of the team work, please change if testing the application
 }
