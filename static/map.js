@@ -2,22 +2,23 @@
 var foundDanger = {};
 var data = '';
 
+//funzione per aprire e chiudere ka schermata dei filtri
 function toggleFiltri(){
     var overlay_filtri = document.querySelector('.overlay_filtri');
     overlay_filtri.classList.toggle('active');
 
 }
-
+//funzione per recurperare dal database le coordinate dei oericoli che l'utente vuole vedere
 function getPericoli(){
     var orso = document.getElementById("orso").checked;
     var incendio = document.getElementById("incendio").checked;
     var valanga = document.getElementById("valanga").checked;
     var zonaDiCaccia = document.getElementById("zonaDiCaccia").checked;
 
-    console.log(orso);
-    console.log(incendio);
-    console.log(valanga);
-    console.log(zonaDiCaccia);
+    console.log("orso = " + orso);
+    console.log("incendio = " + incendio);
+    console.log("valanga = " + valanga);
+    console.log("zonaDiCaccia = " + zonaDiCaccia);
 
     if(orso == true){
         fetch(`../api/v1/dangers/orsi`, {
@@ -27,7 +28,7 @@ function getPericoli(){
             data = resp.json();
             return data;
         })
-        .then(function(data) { // Here you get the data to modify as you please
+        .then(function(data) { 
             foundDanger.self = data.self;
             foundDanger.type = data.telefono;
             foundDanger.coordX = data.coordX;
@@ -47,7 +48,7 @@ function getPericoli(){
             data = resp.json();
             return data;
         })
-        .then(function(data) { // Here you get the data to modify as you please
+        .then(function(data) { 
             foundDanger.self = data.self;
             foundDanger.type = data.telefono;
             foundDanger.coordX = data.coordX;
@@ -67,7 +68,7 @@ function getPericoli(){
             data = resp.json();
             return data;
         })
-        .then(function(data) { // Here you get the data to modify as you please
+        .then(function(data) {
             foundDanger.self = data.self;
             foundDanger.type = data.telefono;
             foundDanger.coordX = data.coordX;
@@ -87,7 +88,7 @@ function getPericoli(){
             data = resp.json();
             return data;
         })
-        .then(function(data) { // Here you get the data to modify as you please
+        .then(function(data) {
             foundDanger.self = data.self;
             foundDanger.type = data.telefono;
             foundDanger.coordX = data.coordX;
