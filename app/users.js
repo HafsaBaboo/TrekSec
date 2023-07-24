@@ -72,12 +72,14 @@ router.post('', async function (req, res, next) {
     return res.status(400).json({ errorNome: 'Insert only letters.'});
   }
 
+  /*
   //controllo e notifico che il nome è stato digitato correttamente
   if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser){
 
     return res.status(200).json({ errorNome: 'go to the next check.'});
   }
-
+*/
+  
   // Controllo e notifico un'eventuale presenza di caratteri che non siano cifre nel campo "telefono"
   if(checkTelefonoValid(content.telefono)) {
     return res.status(400).json({ errorTelefono: 'Insert only digits.'});
@@ -88,17 +90,20 @@ router.post('', async function (req, res, next) {
     return res.status(400).json({ errorTelefono: 'Insert 10 digits.'});
   }
 
+  /*
   //Controllo se è corretto e avviso riguardo la correttezza
   if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
      && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) ) {
     return res.status(200).json({ errorTelefono: 'go to the next check number.'});
   }
-
+*/
+  
   // Controllo e notifico un'eventuale assenza di caratteri validi nel campo "email"
   if(checkIfEmailInString(content.email)) {
     return res.status(400).json({ errorEmail: 'Not a valid email.'});
   }
 
+  /*
   //Controllo se è corretto e avviso riguardo la correttezza
   if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
      && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) 
@@ -106,6 +111,7 @@ router.post('', async function (req, res, next) {
     
       return res.status(200).json({ errorEmail: 'go to the next check email.'});
   }
+  */
   
   // Controllo e notifico un'eventuale tentativo di salvataggio di una password debole nel campo "password"
   if(checkPasswordStrength(content.password) && risp.length > 0) {
@@ -117,7 +123,8 @@ router.post('', async function (req, res, next) {
   if(checkPasswords(content.password, content.checkPassword)) {
     return res.status(400).json({errorCheck: 'Passwords do not match.'});
   }
-  
+
+  /*
   //Controllo se è corretto e avviso riguardo la correttezza
   if(!checkNome(content.nomeCognome) && !(content.nomeCognome.length === 0) && !findUser
      && !checkTelefonoValid(content.telefono) && !checkTelefonoLength(content.telefono) && !(content.telefono.length === 0) 
@@ -126,7 +133,8 @@ router.post('', async function (req, res, next) {
     
       return res.status(200).json({ errorsPassword: 'go to the next check password.'});
   }
-
+*/
+  
   if (!content.chx) {
     // Checkbox is checked
     return res.status(400).json({errorBox: 'Accept the usage terms.'});
