@@ -7,6 +7,7 @@ var data = '';
  * Note that this does not perform an actual authentication of the user.
  * A student is loaded given the specified email,
  * if it exists, the studentId is used in future calls.
+ * 
  */
 
 function registration()
