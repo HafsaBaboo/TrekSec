@@ -102,5 +102,10 @@ function getPericoli(){
 
 function Sos_Button(){
 
-    navigator.contacts.create({ phoneNumber: "3487156282" });
-}
+    if ("contacts" in navigator) {
+        // Effettuo la chiamata al numero specificato
+        navigator.contacts.create({ phoneNumber: "3487156282" });
+      } else {
+        // Se il browser non supporta le chiamate, provo ad aprire una mailto con il numero di telefono
+        window.location.href = "mailto:3487156282";
+}}
