@@ -21,7 +21,10 @@ var dangerSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-
+    onMap:{
+        type:Boolean,
+        default:false
+    },
 });
 
 module.exports = mongoose.model('Danger', dangerSchema);
