@@ -99,3 +99,8 @@ function getPericoli(){
         .catch(error => console.error(error));  
     }
 }
+
+function Sos_Button(){
+
+    navigator.contacts.create({ phoneNumber: "3487156282" });
+}
