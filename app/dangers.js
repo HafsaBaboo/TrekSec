@@ -20,10 +20,12 @@ const Pericolo = {
 
         dangers = dangers.map((entry) => ({
           self: '/api/v1/dangers/' + entry.id,
+          id: entry.id,
           type: entry.type,
           latitude: entry.latitude,
           longitude: entry.longitude,
-          segnalazioni: entry.segnalazioni
+          segnalazioni: entry.segnalazioni,
+          onMap: entry.onMap
       }));
 
     return res.status(200).json(dangers);
@@ -100,34 +102,35 @@ router.get('/:type', async (req, res) => {
 
   });
 
+  
+  router.put('/:id', async(req,res) => {
+
+    const id = req.params.id;
+  
+    const findDanger = await Danger.findById(id);
+  
+    if(!findDanger) {
+      return res.status(404).json({ prova: 'Pericolo non trovato' });
+    } else {
+        await Danger.updateOne({ _id: findDanger._id }, {$set: {onMap: !findDanger.onMap} });
+    }
+
+    return res.status(200).json({prova: 'Pericolo aggiunto'});
+
+  });
+
 
   // cancellazione di un pericolo
   router.delete('/:id', async (req, res) => {
     let dangers = await Danger.findById(req.params.id);
     if (!dangers) {
         res.status(404).send()
-        console.log('User not found')
+        console.log('Danger not found')
         return;
     }
     await dangers.deleteOne()
-    console.log('user removed')
+    console.log('Danger removed!')
     res.status(204).send()
-});
-
-router.put('/:id', async(req,res) => {
-
-  const id = req.params.id;
-
-  const findDanger = await Danger.findById(id);
-
-  if(!findDanger) {
-    return res.status(404).json({ prova: 'Pericolo non trovato' });
-  } else {
-      await Danger.updateOne({ _id: findDanger._id }, {$set: {onMap: !findDanger.onMap} });
-  }
-
-  return res.status(200).json({prova: 'Pericolo aggiunto'});
-
 });
 
   module.exports = router;
