@@ -46,7 +46,7 @@ async function Enter(dato, type){
     if(type == "moderator"){
           
       console.log("passato Mod");
-      window.location.href = "Moderator.html";
+      window.location.href = "moderator.html";
 
     }else{
       if(type == "callCenter"){

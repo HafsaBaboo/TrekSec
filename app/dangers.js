@@ -114,4 +114,20 @@ router.get('/:type', async (req, res) => {
     res.status(204).send()
 });
 
+router.put('/:id', async(req,res) => {
+
+  const id = req.params.id;
+
+  const findDanger = await Danger.findById(id);
+
+  if(!findDanger) {
+    return res.status(404).json({ prova: 'Pericolo non trovato' });
+  } else {
+      await Danger.updateOne({ _id: findDanger._id }, {$set: {onMap: !findDanger.onMap} });
+  }
+
+  return res.status(200).json({prova: 'Pericolo aggiunto'});
+
+});
+
   module.exports = router;
