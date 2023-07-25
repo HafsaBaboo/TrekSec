@@ -5,6 +5,7 @@ const User = require('./models/user'); // get our mongoose model
 const jwt = require("jsonwebtoken");
 const nodeMailer = require('nodemailer');
 const Mailgen = require('mailgen');
+const user = require('./models/user');
 
 var risp = [];
 
@@ -14,7 +15,8 @@ router.get('', async (req, res) => {
   // In particolare, per ogni utente, verranno stampati i campi "self" ed "email"
   users = users.map((entry) => ({
     self: '/api/v1/users/' + entry.id,
-    email: entry.email
+    email: entry.email,
+    telefono: entry.telefono
   }));
 
   return res.status(200).json(users);
@@ -209,16 +211,41 @@ router.get('/:id/coordinates', async (req, res) => {
   });
 });
 
-//Operazione che permette al CallCenter di identificare le coordinate dell'utente, in caso di pericolo
-router.get('/:id/coordinatesCall',async(req,res)=>{
-  let user = await User.findById(req.params.id);
-  return res.status(200).json({
-    self : '/api/v1/users/' + user.id,
-    telefono : user.telefono,
-    lat: user.coordX,
-    long : user.coordY
-  });
+router.get('/telefoni', async (req, res) => {
+  let users = await User.find();;
+  // In particolare, per ogni utente, verranno stampati i campi "self", "telefono", "coordinate"
+  users = users.map((entry) => ({
+    self: '/api/v1/users/telefoni/' + entry.telefono,
+    telefono: entry.telefono,
+    coordX: entry.coordX,
+    coordY: entry.coordY
+  }));
+  return res.status(200).json(users); 
 });
+
+//numero non esistente  nel database oppure esistente
+router.get('/telefoni/:telefono', async (req, res) => {
+
+  const telefono = req.params.telefono;
+
+  if (req.params.telefono) {
+      const findUser = await User.findOne({telefono: telefono});
+
+      console.log(findUser.id);
+      return res.status(200).json({
+          self: '/api/v1/users/' + findUser.id,
+          telefono: findUser.telefono,
+          coordX: findUser.coordX,
+          coordY: findUser.coordY,
+          success: true,
+          error: 'Numero di telefono valido'
+      });
+
+  } else {
+    return res.status(400).json({ error: 'Numero di telefono non valido' });
+  }
+  
+}); 
 
 router.delete('/:id', async (req, res) => {
     let user = await User.findById(req.params.id);
@@ -330,7 +357,7 @@ router.post('/reset-password',  async (req, res) => {
     { new: true }
   );
 
-  const resetLink = `http://localhost:8080/newPassword.html?token=${token}`;
+  const resetLink = `https://treksec.onrender.com/newPassword.html?token=${token}`;
   sendMailF(findUser.email, resetLink);
 
   return res.json({token});
