@@ -211,17 +211,6 @@ router.get('/:id/coordinates', async (req, res) => {
   });
 });
 
-//Operazione che permette al CallCenter di identificare le coordinate dell'utente, in caso di pericolo
-router.get('/:id/coordinatesCall',async(req,res)=>{
-  let user = await User.findById(req.params.id);
-  return res.status(200).json({
-    self : '/api/v1/users/' + user.id,
-    telefono : user.telefono,
-    lat: user.coordX,
-    long : user.coordY
-  });
-});
-
 router.get('/telefoni', async (req, res) => {
   let users = await User.find();;
   // In particolare, per ogni utente, verranno stampati i campi "self", "telefono", "coordinate"
@@ -234,7 +223,7 @@ router.get('/telefoni', async (req, res) => {
   return res.status(200).json(users); 
 });
 
-
+//numero non esistente  nel database oppure esistente
 router.get('/telefoni/:telefono', async (req, res) => {
 
   const telefono = req.params.telefono;
@@ -248,15 +237,15 @@ router.get('/telefoni/:telefono', async (req, res) => {
           telefono: findUser.telefono,
           coordX: findUser.coordX,
           coordY: findUser.coordY,
-          success: true
+          success: true,
+          error: 'Numero di telefono valido'
       });
 
   } else {
     return res.status(400).json({ error: 'Numero di telefono non valido' });
   }
   
-});
-
+}); 
 
 router.delete('/:id', async (req, res) => {
     let user = await User.findById(req.params.id);
