@@ -537,6 +537,33 @@ describe('POST /api/v1/users', () => {
     
   });
 
+  test('the telephone number is wrong', async()=>{
+
+      const response = await request(app)
+        .post('/api/v1/users/telefoni/:telefono')
+        .send({
+          telefono: '123469023'
+        }) 
+        .set('Accept','application/json')
+        .expect('Content-Type',/json/)
+        .except(400,{error: 'Numero di telefono non valido'})
+
+  })
+
+  test('the telephone number is true', async () => {
+ 
+    const response = await request(app)
+      .post('/api/v1/users/telefoni/:telefono')
+      .send({
+        telefono: '1234567891' //numero valido
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, {error: 'Numero di telefono valido'})
+   
+  });    
+  
+
   test('should send a mail to the user user', async () => {
  
     const response = await request(app)
