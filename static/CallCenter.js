@@ -41,7 +41,7 @@ function goBack() {
 function Enter(dato){
   //controllo che l'utente esista nel database e in caso fosse, mostro la mappa con stampate le coordinate dell'utente che ha bisogno si soccorso
   if( dato === true ){
-    userCoordinates = sessionStorage.getItem('userCoordinates');//sessionStorage
+    userCoordinates = JSON.parse(sessionStorage.getItem('userCoordinates'));//sessionStorage
     window.location.href = "./MapCall.html";
     var paragraph = document.getElementById("p");
     var text = document.createTextNode("lat: " + userCoordinates.coordX + "\nlong: " + userCoordinates.coordY);
