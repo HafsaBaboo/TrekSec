@@ -43,10 +43,10 @@ function Enter(dato){
   if( dato === true ){
     userCoordinates = JSON.parse(sessionStorage.getItem('userCoordinates'));//sessionStorage
     window.location.href = "./MapCall.html";
-    var paragraph = document.getElementById("p");
+    //var paragraph = document.getElementById("p");
     var text = document.createTextNode("lat: " + userCoordinates.coordX + "\nlong: " + userCoordinates.coordY);
 
-    paragraph.appendChild(text);
+    //paragraph.appendChild(text);
   
   }else{
     console.log("L'utente non è stato autenticato correttamente. Gestisci l'errore appropriatamente.");
