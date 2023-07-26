@@ -11,6 +11,14 @@ function toggleFiltri(){
     overlay_filtri.classList.toggle('active');
 
 }
+
+function zoomIn() {
+    map.zoomIn();
+}
+
+function zoomOut() {
+    map.zoomOut();
+}
 //funzione per recurperare dal database le coordinate dei oericoli che l'utente vuole vedere
 function getPericoli(){
     var orso = document.getElementById("orso").checked;
