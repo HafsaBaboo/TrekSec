@@ -30,6 +30,8 @@ function goMap(){
   Enter(data.success );
 
 })
+.catch(error => console.error(error));
+};
 
 
 function goBack() {
