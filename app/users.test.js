@@ -67,6 +67,88 @@ describe('GET /api/v1/users', () => {
 
 });
 
+describe('GET /api/v1/users/telefoni/:telefono', () => {
+  let userSpy, userSpy2;
+  let userSpyFindById;
+
+  beforeAll( () => {
+    const User = require('./models/user');
+    userSpy = jest.spyOn(User, 'find').mockImplementation((criterias) => {
+      return [{
+        id: "646238b39741945424b75b7a",
+        email: 'hamzaoui.h02@gmail.com',
+        coordX: '30.22',
+        coordY: '21.55'
+      }];
+    });
+
+    userSpyFindById = jest.spyOn(User, 'findOne').mockImplementation((criterias) => {
+      if (criterias.telefono === "1234567891")
+        return {
+          id: "646238b39741945424b75b7a",
+          email: 'hamzaoui.h02@gmail.com',
+          coordX: '30.22',
+          coordY: '21.55'
+        };
+      else
+        return {};
+    });
+  });
+
+  afterAll(async () => {
+    userSpy.mockRestore();
+    userSpyFindById.mockRestore();
+  });
+
+    test('the telephone number is shorter', async()=>{
+
+      const response = await request(app)
+        .get('/api/v1/users/telefoni/123469023') 
+        .expect('Content-Type',/json/)
+        .expect(400,{error: 'Numero di telefono non valido'})
+  
+  });
+
+  test('the telephone number is long', async()=>{
+
+    const response = await request(app)
+      .get('/api/v1/users/telefoni/12346902573') 
+      .expect('Content-Type',/json/)
+      .expect(400,{error: 'Numero di telefono non valido'})
+
+});
+  
+  test('the telephone number is valid', async () => {
+  
+    const response = await request(app)
+      .get('/api/v1/users/telefoni/1234567891')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then( (res) => {
+        if(res.body && res.body[0]) {
+            expect(res.body[0]).toEqual({
+              self: '/api/v1/users/646238b39741945424b75b7a',
+              email: 'hamzaoui.h02@gmail.com',
+              lat: '30.22',
+              long: '21.55'
+            });
+            }
+        });
+
+   
+  });    
+
+  test('the telephone number is not found', async()=>{
+
+    const response = await request(app)
+      .get('/api/v1/users/telefoni/1234690257') 
+      .expect('Content-Type',/json/)
+      .expect(404,{error: 'Numero di telefono non trovato'})
+
+});
+
+});
+
 describe('POST /api/v1/users', () => {
   const User = require('./models/user');
   
