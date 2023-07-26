@@ -141,18 +141,6 @@ function onLocationError(e) {
     alert(e.message);
 }
 
-
-function zoomIn() {
-    map.zoomIn();
-}
-
-function zoomOut() {
-    map.zoomOut();
-}
-
-
-
-
 function toggleMenu() {
     var overlay = document.querySelector('.mappa_prova .overlay');
     overlay.classList.toggle('active');
